@@ -7,7 +7,7 @@ import getIssues from "./getIssues";
 import buildTable from "./buildTable";
 
 const main = async () => {
-  const token = core.getInput("github-token", { required: true });
+  const token = core.getInput("github-token");
   const productName = core.getInput("product-name", { required: true });
   const vpatLabel = core.getInput("vpat-label", { required: false });
   const additionalLabels = core.getInput("additional-labels", {

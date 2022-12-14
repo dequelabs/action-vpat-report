@@ -4,7 +4,7 @@ author: Deque Systems, Inc
 inputs:
   github-token:
     description: GitHub token
-    required: true
+    default: ${{ github.token }}
   product-name:
     description: Product name
     required: true
