@@ -23,9 +23,9 @@ jobs:
           product-name: Test
       - uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "docs: Generate a VPAT"
-          branch: auto-generate-vpat-report
+          branch: test-vpat-report
           base: main
           title: "docs: Generate a VPAT"
           body: |
