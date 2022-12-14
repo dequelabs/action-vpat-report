@@ -1,0 +1,22 @@
+name: Generate VPAT
+description: Generate a VPAT based on open issues (and their labels)
+author: Deque Systems, Inc
+inputs:
+  github-token:
+    description: GitHub token
+    default: ${{ github.token }}
+  product-name:
+    description: Product name
+    required: true
+  output-file:
+    description: File to output the report to. Accepts "{DATE}" and "{PRODUCT}" placeholders.
+    default: vpat-{DATE}-{PRODUCT}.md
+  vpat-label:
+    description: Label to filter VPAT issues by
+    default: VPAT
+  additional-labels:
+    description: Additional labels to filter issues by
+    default: ""
+runs:
+  using: node16
+  main: dist/index.js
