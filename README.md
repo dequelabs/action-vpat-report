@@ -8,9 +8,9 @@
 name: Generate a VPAT report
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Manually trigger.
   schedule:
-    - cron: "0 0 * * SUN"
+    - cron: "0 0 * * SUN" # Every Sunday at 00:00.
 
 jobs:
   generate_report:
@@ -22,7 +22,7 @@ jobs:
           product-name: axe DeveloperHub
           output-file: vpats/{DATE}-{PRODUCT}.md
           vpat-label: VPAT
-          additional-labels: "PROD: axe-devhub"
+          additional-labels: "PROD: axe-devhub,some-other-label"
 ```
 
 ## Inputs
