@@ -1,7 +1,7 @@
 {
   "name": "action-vpat-report",
   "version": "0.0.0",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "license": "Unlicensed",
   "private": true,
   "scripts": {
