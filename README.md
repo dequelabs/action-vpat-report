@@ -16,6 +16,7 @@ jobs:
   generate_report:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: dequelabs/action-vpat-report@main
         with:
           github-token: ${{ secrets.PAT }}
