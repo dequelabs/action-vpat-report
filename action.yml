@@ -12,8 +12,8 @@ inputs:
     description: File to output the report to. Accepts "{DATE}" and "{PRODUCT}" placeholders.
     default: vpat-{DATE}-{PRODUCT}.md
   vpat-label:
-    description: Label to filter VPAT issues by
-    default: VPAT
+    description: Issues with this label will be included in the VPAT
+    default: A11Y
   additional-labels:
     description: Additional labels to filter issues by
     default: ""
