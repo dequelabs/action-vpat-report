@@ -25,7 +25,7 @@ const buildTable = ({ level, issues, owner, repo }: Params) => {
     const relevantIssues = issues
       .filter((issue) => {
         const labels = issue.labels.map((l) => l.name);
-        return labels.includes("WCAG " + sc.id);
+        return labels.includes("VPAT") && labels.includes("WCAG " + sc.id);
       })
       .sort((a, b) => {
         const aDate = new Date(a.created_at);
