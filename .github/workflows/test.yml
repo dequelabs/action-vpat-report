@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 20
           cache: yarn
@@ -20,7 +20,16 @@ jobs:
       - uses: ./
         with:
           product-name: Test
-      - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+      # Publishing the sample VPAT needs a writable token, so it only runs when
+      # main moves. Dependabot-triggered runs get a read-only GITHUB_TOKEN and
+      # this push 403s ("Permission to ... denied to github-actions[bot]"),
+      # which failed the job on every Dependabot PR. A `permissions:` block
+      # cannot fix that — the token is capped read-only for those runs.
+      # The `uses: ./` step above still exercises the action on every branch,
+      # so a bump that breaks report generation is still caught here.
+      # The actor clause covers a Dependabot-authored push landing on main.
+      - if: github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "docs: Generate a VPAT"
