@@ -22,7 +22,15 @@ jobs:
           product-name: Test
       - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Dependabot-triggered runs get a read-only GITHUB_TOKEN, so pushing
+          # the test-vpat-report branch 403s ("Permission to ... denied to
+          # github-actions[bot]") and every Dependabot PR fails this job.
+          # VPAT_BOT_PAT must live in the *Dependabot* secret store — Actions
+          # secrets are not exposed to Dependabot-triggered runs, and the two
+          # stores are separate. It resolves to "" on human/main pushes unless
+          # it is also added as an Actions secret, hence the GITHUB_TOKEN
+          # fallback: those runs already work and must keep working.
+          token: ${{ secrets.VPAT_BOT_PAT || secrets.GITHUB_TOKEN }}
           commit-message: "docs: Generate a VPAT"
           branch: test-vpat-report
           base: main
